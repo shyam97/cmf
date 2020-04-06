@@ -8,7 +8,7 @@ print("Hello")
 
 print(np.pi)
 
-plt.scatter(0,0)
+plt.scatter(1,1)
 plt.show()
 
 print(time.time() - start)
