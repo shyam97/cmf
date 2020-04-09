@@ -11,4 +11,5 @@ print(np.pi)
 plt.scatter(1,1)
 plt.show()
 
+print("Edit2")
 print(time.time() - start)
