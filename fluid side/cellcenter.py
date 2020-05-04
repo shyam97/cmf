@@ -18,6 +18,7 @@ def cellcenter(grid):
         for j in range(0,n_y):
             pgrid[0][i][j] = (grid[0][i][j]+grid[0][i+1][j]+grid[0][i][j+1]\
                                 +grid[0][i+1][j+1])/4
+                                
             pgrid[1][i][j] = (grid[1][i][j]+grid[1][i+1][j]+grid[1][i][j+1]\
                                 +grid[1][i+1][j+1])/4
 

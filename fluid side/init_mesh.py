@@ -9,10 +9,6 @@ Objective:
 '''
 
 # Uniform mesh for now
-def init_mesh(L,W,n_x,n_y):
-
-    step = L/n_x
-
-    grid = step*np.mgrid[0:n_x+1,0:n_y+1]
-
+def init_mesh(L,W,h_x,h_y):
+    grid = np.mgrid[0:L+h_x:h_x,0:W+h_y:h_y]
     return grid
