@@ -7,5 +7,14 @@ Properties:
 4. Axisymmetric
 5.
 
+Plan:
+1. Create a staggered mesh from given velocity mesh
+2. Assume constant pressure gradient, solve for velocity without wall conditions
+
 
 Solid Side:
+
+Properties:
+1.
+2. Randomize solid particle sizes
+3.
