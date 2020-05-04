@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as pyplot
+import matplotlib.pyplot as plt
 
 '''
 Objective:
@@ -8,7 +8,11 @@ Objective:
 
 '''
 
-L = 10
-W = 5
+# Uniform mesh for now
+def init_mesh(L,W,n_x,n_y):
 
-n_x = 100
+    step = L/n_x
+
+    grid = step*np.mgrid[0:n_x+1,0:n_y+1]
+
+    return grid
