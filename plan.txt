@@ -1,1 +1,11 @@
-Hi
+Fluid Side:
+
+Properties:
+1. Turbulent
+2. Uncoupled
+3. Wall bounded
+4. Axisymmetric
+5.
+
+
+Solid Side:
