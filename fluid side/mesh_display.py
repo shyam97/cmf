@@ -12,10 +12,10 @@ from cellcenter import *
 from init_mesh import *
 from facecenter import *
 
-L = 10
-W = 5
+L = 0.5
+W = 0.5
 h_x = 0.1
-h_y = 0.05
+h_y = 0.1
 
 n_x = int(L/h_x)
 n_y = int(W/h_y)
@@ -25,6 +25,7 @@ pgrid = cellcenter(grid)
 ugrid = facecenter(grid,0)
 vgrid = facecenter(grid,1)
 
+print(grid)
 # print(grid)
 # print(pgrid)
 
