@@ -1,0 +1,4 @@
+plt.figure()
+plt.imshow(p.T, origin = 'lower', extent=[0,l,0,w])
+plt.colorbar()
+plt.show()
