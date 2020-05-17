@@ -11,9 +11,6 @@ gx=0.0
 gy=0.0
 rho1=1.0
 
-#dynamic viscosity
-m0=0.05
-
 #tangential velocities
 unorth=2.
 usouth=0.
@@ -27,7 +24,7 @@ dt=0.0004
 nstep=100
 maxiter=1000
 maxError=0.001
-beta=1.2
+beta= 1.2
 
 u=np.zeros((nx+1,ny+2))
 v=np.zeros((nx+2,ny+1))
@@ -35,6 +32,7 @@ p=np.zeros((nx+2,ny+2))
 
 ut=np.zeros((nx+1,ny+2))
 vt=np.zeros((nx+2,ny+1))
+
 
 #temp variables for pressure calculations
 tmp1=np.zeros((nx+2,ny+2))
@@ -50,7 +48,11 @@ y = np.linspace(0.,Ly,ny)
 dx=Lx/(nx) 
 dy=Ly/(ny)
 
+#dynamic viscosity and viscosity initialization
+m0=0.05
+m0t = np.ones((nx+2,ny+2))*m0* 
 
+#Density grid
 r=np.ones((nx+2,ny+2))*rho1
             
 time=0.
@@ -62,7 +64,7 @@ for steps in range(nstep):
     v[0,:]=2.*vwest-v[1,:]
     v[-1,:]=2.*veast-v[-2,:]
     
-    #pressure boundary condition to be imposed
+    #pressure boundary condition to be imposed here
 
     # TEMPORARY u-velocity                               
     for i in range(1,nx):
@@ -70,7 +72,7 @@ for steps in range(nstep):
             ut[i,j]=u[i,j]+dt*(-0.25*(((u[i+1,j]+u[i,j])**2-(u[i,j]+\
                 u[i-1,j])**2)/dx+((u[i,j+1]+u[i,j])*(v[i+1,j]+\
                 v[i,j])-(u[i,j]+u[i,j-1])*(v[i+1,j-1]+v[i,j-1]))/dy)+\
-                m0/(0.5*(r[i+1,j]+r[i,j]))*((u[i+1,j]-2*u[i,j]+u[i-1,j])/dx**2+\
+                (0.5*(m0t[i,j] + m0t[i+1,j]))/(0.5*(r[i+1,j]+r[i,j]))*((u[i+1,j]-2*u[i,j]+u[i-1,j])/dx**2+\
                 (u[i,j+1]-2*u[i,j]+u[i,j-1])/dy**2 )+gx)
 
     # TEMPORARY v-velocity                               
@@ -79,7 +81,7 @@ for steps in range(nstep):
             vt[i,j]=v[i,j]+dt*(-0.25*(((u[i,j+1]+u[i,j])*(v[i+1,j]+\
                 v[i,j])-(u[i-1,j+1]+u[i-1,j])*(v[i,j]+v[i-1,j]))/dx+\
                 ((v[i,j+1]+v[i,j])**2-(v[i,j]+v[i,j-1])**2)/dy)+\
-                m0/(0.5*(r[i,j+1]+r[i,j]))*((v[i+1,j]-2*v[i,j]+v[i-1,j])/dx**2+\
+                (0.5*(m0t[i,j] + m0t[i+1,j]))/(0.5*(r[i,j+1]+r[i,j]))*((v[i+1,j]-2*v[i,j]+v[i-1,j])/dx**2+\
                 (v[i,j+1]-2*v[i,j]+v[i,j-1])/dy**2 )+gy)    
     
     #Compute source term and the coefficient for p(i,j)
@@ -141,3 +143,4 @@ plt.clf()
 plt.streamplot(x,y,uu.T,vv.T)
 
 plt.show()
+
