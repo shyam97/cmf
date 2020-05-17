@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 from mesh import *
 
 l = 0.2
@@ -10,6 +11,9 @@ md = 0
 
 rho_s = 1.25
 p_a = 101325
+nu_s = 1.48e-5
+
+dt = 1e-4
 
 grid,pgrid,ugrid,vgrid = create_mesh(l,w,h_x,h_y,md)
 
@@ -17,7 +21,7 @@ p = matrix(pgrid) + p_a
 u = matrix(ugrid)
 v = matrix(vgrid)
 rho = matrix(pgrid) + rho_s
-visc = matrix(pgrid)
+nu = matrix(pgrid) + nu_s
 
 v[:,0] = 0
 v[:,-1] = 0
@@ -26,3 +30,11 @@ p[:,0] = 0
 p[:,-1] = 0
 rho[:,0] = 1e10
 rho[:,-1] = 1e10
+
+plt.figure()
+ax = plt.gca()
+im = ax.imshow(u.T, origin = 'lower', extent=[-h_x,l+h_x,-h_y,w+h_y])
+divider = make_axes_locatable(ax)
+cax = divider.append_axes("right", size="5%", pad=0.05)
+plt.colorbar(im, cax=cax)
+plt.show()
