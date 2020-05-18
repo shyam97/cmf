@@ -5,7 +5,7 @@ from mesh import *
 l = 0.2
 w = 0.1
 h_x = 0.01
-h_y = 0.001
+h_y = 0.01
 md = 0
 
 rho_s = 1.25
@@ -30,17 +30,8 @@ v[:,-1] = 0
 u[0,:] = 1
 p[:,0] = 0
 p[:,-1] = 0
-rho[:,0] = 1e10
+rho[:,0] = 1e10 #
 rho[:,-1] = 1e10
-
-from mpl_toolkits.axes_grid1 import make_axes_locatable
-plt.figure()
-ax = plt.gca()
-im = ax.imshow(u.T, origin = 'lower', extent=[-h_x,l+h_x,-h_y,w+h_y])
-divider = make_axes_locatable(ax)
-cax = divider.append_axes("right", size="5%", pad=0.05)
-plt.colorbar(im, cax=cax)
-plt.show()
 
 for t in range(1,tsteps):
     time = time + dt

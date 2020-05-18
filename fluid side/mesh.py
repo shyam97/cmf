@@ -16,12 +16,12 @@ def init_mesh(L,W,h_x,h_y):
 def facecenter(grid,axis):
 
     if axis==0:
-        n_x = len(grid[0])-1
+        n_x = len(grid[0])-3
         n_y = len(grid[0][0])-1
 
     else:
-        n_x = len(grid[0])-1
-        n_y = len(grid[0][0])-1
+        n_x = len(grid[0])-2
+        n_y = len(grid[0][0])-2
 
     fgrid = np.zeros((2,n_x,n_y))
 
@@ -40,7 +40,7 @@ def facecenter(grid,axis):
     return fgrid
 
 def cellcenter(grid):
-    n_x = len(grid[0])-1
+    n_x = len(grid[0])-2
     n_y = len(grid[0][0])-1
 
     pgrid = np.zeros((2,n_x,n_y))
@@ -78,13 +78,13 @@ def create_mesh(l,w,h_x,h_y,viewgrid):
                 plt.figure(num=1)
                 plt.scatter(grid[0,i,j],grid[1,i,j],c='k',s=10)
 
-                if i<n_x+1 and j<n_y+1:
+                if i<len(pgrid[0]) and j<len(pgrid[0,0]):
                     plt.scatter(pgrid[0,i,j],pgrid[1,i,j],c='r',s=10)
 
-                if i<n_x+1 and j<n_y:
+                if i<len(vgrid[0]) and j<len(vgrid[0,0]):
                     plt.scatter(vgrid[0,i,j],vgrid[1,i,j],c='b',s=10,marker='x')
 
-                if j<n_y+1 and i<n_x:
+                if j<len(ugrid[0,0]) and i<len(ugrid[0]):
                     plt.scatter(ugrid[0,i,j],ugrid[1,i,j],c='g',s=10,marker='x')
 
         plt.plot([0,l],[0,0],'k')
