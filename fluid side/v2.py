@@ -77,7 +77,8 @@ for t in range(0,tsteps):
                 0.5*(mu[i+1,j] + mu[i,j])/(0.5*(rho[i+1,j]+rho[i,j]))*\
                 ((u[i+1,j]-2*u[i,j]+u[i-1,j])/h_x**2+\
                 (u[i,j+1]-2*u[i,j]+u[i,j-1])/h_y**2 )+gx)
-                #To find the u velocity component at the right end of the pipe, use the discretized form of the continuity equation
+                #To find the u velocity component at the right end of the pipe,
+                # use the discretized form of the continuity equation
 
     #V STAR
     for i in range(1,nx+1):
