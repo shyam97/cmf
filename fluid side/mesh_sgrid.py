@@ -50,7 +50,7 @@ dy=Ly/(ny)
 
 #dynamic viscosity and viscosity initialization
 m0=0.05
-m0t = np.ones((nx+2,ny+2))*m0* 
+m0t = np.ones((nx+2,ny+2))*m0 
 
 #Density grid
 r=np.ones((nx+2,ny+2))*rho1
@@ -142,5 +142,5 @@ plt.figure()
 plt.clf()
 plt.streamplot(x,y,uu.T,vv.T)
 
-plt.show()
+# plt.show()
 
