@@ -137,16 +137,16 @@ for t in range(0,tsteps):
     for i in range(1,nx+1):
         for j in range(1,ny):
             v[i,j]=vstar[i,j]-dt*(2.0/h_y)*(p[i,j+1]-p[i,j])/(rho[i,j+1]+rho[i,j])
+            
 
     print(clock, time.time() - start, iter, np.abs(pn-p).max())
-uu=0.5*(u[0:nx,1:ny+1]+u[0:nx,0:ny])
-vv=0.5*(v[1:nx+1,0:ny]+v[0:nx,0:ny])
-yy,xx=np.mgrid[0:(nx-1)*h_x:nx*1j,0:(ny-1)*h_y:ny*1j]
-plt.clf()
-plt.quiver(xx,yy,uu.T,vv.T)
-plt.show()
-plt.clf()
-plt.streamplot(x,y,uu.T,vv.T);
-plt.show()
-plt.imshow(p.T, origin='lower')
-plt.show()
+
+    uu=0.5*(u[0:nx,1:ny+1]+u[0:nx,0:ny])
+    vv=0.5*(v[1:nx+1,0:ny]+v[0:nx,0:ny])
+    yy,xx=np.mgrid[0:(nx-1)*h_x:nx*1j,0:(ny-1)*h_y:ny*1j]
+    plt.figure(num = 1)
+    plt.quiver(xx,yy,uu.T,vv.T)
+    plt.figure(num = 2)
+    plt.streamplot(x,y,uu.T,vv.T);
+    plt.figure()
+    plt.imshow(p.T, origin='lower')
