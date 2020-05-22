@@ -170,13 +170,13 @@ for t in range(0,tsteps):
 
     plt.figure(num=1, figsize = (10,5))
     plt.clf()
-    plt.quiver(xx,yy,uu.T,vv.T)
+    # plt.quiver(xx,yy,uu.T,vv.T)
     # ax = plt.gca()
     # im = ax.imshow(u.T, origin = 'lower', extent=[-h_x,l+h_x,-h_y,w+h_y])
     # divider = make_axes_locatable(ax)
     # cax = divider.append_axes("right", size="5%", pad=0.05)
     # plt.colorbar(im, cax=cax)
-    # plt.streamplot(x,y,uu.T,vv.T);
+    plt.streamplot(x,y,uu.T,vv.T);
     plt.pause(0.001)
 
 plt.figure(num=1, figsize = (10,5))
