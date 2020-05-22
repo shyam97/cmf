@@ -2,24 +2,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 start = time.time()
-from mesh import *
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 # GRID SETTINGS
-l = 1
-w = 0.5
+l = 0.10
+w = 0.010
 nx = 20
-ny = 20
+ny = 50
 h_x = l/nx
 h_y = w/ny
 md = 0
 
-grid,pgrid,ugrid,vgrid = create_mesh(l,w,h_x,h_y,md)
 x = np.linspace(0.,l,nx)
 y = np.linspace(0.,w,ny)
 
 # TIME STEP SETTINGS
-dt = 1e-2
+dt = 1e-3
 tsteps = 100
 flow = dt*tsteps
 clock = 0
@@ -35,7 +33,7 @@ iter = 0
 rho_s = 1
 rho_w = 1e10
 mu_s = 1e-5
-p_s = 1e5
+p_s = 1
 gx = 0
 gy = 0
 
@@ -57,16 +55,19 @@ rho = np.ones((nx+2,ny+2))*rho_s
 mu = np.ones((nx+2,ny+2))*mu_s
 
 # INLET STATIC BOUNDARY
-u[0,:] = 1
+u[0,:] = 0
+p[0,:] = 2
 
 # OUTLET STATIC BOUNDARY
-p[-1,:] = p_s
+p[-1,:] = 1
 
 # BOTTOM WALL STATIC BOUNDARY
 v[:,0] = 0
+p[:,0] = 0
 
 # TOP WALL STATIC BOUNDARY
 v[:,-1] = 0
+p[:,-1] = 0
 
 for t in range(0,tsteps):
     clock = clock + dt
@@ -74,19 +75,16 @@ for t in range(0,tsteps):
 
     # INLET DYNAMIC BOUNDARY
     v[0,:] = -1*v[1,:]
-    p[0,:] = p[1,:]
 
     # OUTLET DYNAMIC BOUNDARY
-    v[-1,:] = v[-2,:]
+    v[-1,:] = 1*v[-2,:]
     u[-1,:] = u[-2,:]
 
     # BOTTOM WALL DYNAMIC BOUNDARY
     u[:,0] = -1*u[:,1]
-    p[:,0] = 0
 
     # TOP WALL DYNAMIC BOUNDARY
     u[:,-1] = -1*u[:,-2]
-    p[:,-1] = 0
 
     # U STAR
     for i in range(1,nx+1):
@@ -163,6 +161,8 @@ for t in range(0,tsteps):
             v[i,j]=vstar[i,j]-dt*(2.0/h_y)*(p[i,j+1]-p[i,j])/(rho[i,j+1]+rho[i,j])
 
 
+    u[0,:] = u[1,:]
+
     print(clock, time.time() - start, iter, np.abs(u).max())
     uu=0.5*(u[0:nx,1:ny+1]+u[0:nx,0:ny])
     vv=0.5*(v[1:nx+1,0:ny]+v[0:nx,0:ny])
@@ -170,12 +170,12 @@ for t in range(0,tsteps):
 
     plt.figure(num=1, figsize = (10,5))
     plt.clf()
-    # plt.quiver(xx,yy,uu.T,vv.T)
-    ax = plt.gca()
-    im = ax.imshow(u.T, origin = 'lower', extent=[-h_x,l+h_x,-h_y,w+h_y])
-    divider = make_axes_locatable(ax)
-    cax = divider.append_axes("right", size="5%", pad=0.05)
-    plt.colorbar(im, cax=cax)
+    plt.quiver(xx,yy,uu.T,vv.T)
+    # ax = plt.gca()
+    # im = ax.imshow(u.T, origin = 'lower', extent=[-h_x,l+h_x,-h_y,w+h_y])
+    # divider = make_axes_locatable(ax)
+    # cax = divider.append_axes("right", size="5%", pad=0.05)
+    # plt.colorbar(im, cax=cax)
     # plt.streamplot(x,y,uu.T,vv.T);
     plt.pause(0.001)
 
