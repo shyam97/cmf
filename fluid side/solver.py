@@ -6,7 +6,7 @@ l = 0.2
 w = 0.1
 nx = 20
 ny = 20
-md = 0
+md = 1
 h_x = l/(nx)
 h_y = w/(ny)
 

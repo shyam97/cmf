@@ -1,4 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
-vgrid[:,0] = 0
+import os
+def clear():
+    os.system( 'cls' )
+print("Hi there")
+clear()
+print("Hi")

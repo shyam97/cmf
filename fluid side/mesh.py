@@ -16,11 +16,11 @@ def init_mesh(L,W,h_x,h_y):
 def facecenter(grid,axis):
 
     if axis==0:
-        n_x = len(grid[0])-3
+        n_x = len(grid[0])-1
         n_y = len(grid[0][0])-1
 
     else:
-        n_x = len(grid[0])-2
+        n_x = len(grid[0])-1
         n_y = len(grid[0][0])-2
 
     fgrid = np.zeros((2,n_x,n_y))
@@ -40,7 +40,7 @@ def facecenter(grid,axis):
     return fgrid
 
 def cellcenter(grid):
-    n_x = len(grid[0])-2
+    n_x = len(grid[0])-1
     n_y = len(grid[0][0])-1
 
     pgrid = np.zeros((2,n_x,n_y))
